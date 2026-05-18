@@ -1008,23 +1008,101 @@
 
     <form class="order-form reveal" id="orderForm">
 
-      <!-- Name -->
       <div class="form-group">
-        <label class="form-label">الاسم الكامل <span class="req">*</span></label>
-        <input type="text" name="name" class="form-input" placeholder="مثال: فاطمة بن علي" required>
+        <label class="form-label">اسم الزوجة <span class="req">*</span></label>
+        <input type="text" name="wife_name" class="form-input" placeholder="مثال: فاطمة" required>
       </div>
 
-      <!-- Phone -->
+      <div class="form-group">
+        <label class="form-label">اسم الزوج <span class="req">*</span></label>
+        <input type="text" name="husband_name" class="form-input" placeholder="مثال: محمد" required>
+      </div>
+
       <div class="form-group">
         <label class="form-label">رقم الهاتف <span class="req">*</span></label>
         <input type="tel" name="phone" class="form-input" placeholder="05xxxxxxxx" required>
       </div>
 
-      <!-- Product name (optional) -->
       <div class="form-group">
-        <label class="form-label">اسم المنتج (اختياري)</label>
-        <p class="form-hint">إذا عرفتِ اسم المنتج يمكنكِ كتابته هنا</p>
-        <input type="text" name="product_name" class="form-input" placeholder="مثال: لوحة الآية والاسمين">
+        <label class="form-label">تاريخ العقد داخل المنتج</label>
+        <p class="form-hint">هذا الحقل اختياري ويمكن تركه فارغاً</p>
+        <input type="date" name="contract_date" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">الولاية وسعر التوصيل <span class="req">*</span></label>
+        <p class="form-hint">الأسعار الحالية افتراضية ويمكن تعديلها لاحقاً حسب تعريفة Norest Express</p>
+        <select name="wilaya" class="form-input" required>
+          <option value="" disabled selected>اختاري الولاية</option>
+          <option value="أدرار" data-price="800">أدرار - 800 دج</option>
+          <option value="الشلف" data-price="600">الشلف - 600 دج</option>
+          <option value="الأغواط" data-price="700">الأغواط - 700 دج</option>
+          <option value="أم البواقي" data-price="600">أم البواقي - 600 دج</option>
+          <option value="باتنة" data-price="600">باتنة - 600 دج</option>
+          <option value="بجاية" data-price="600">بجاية - 600 دج</option>
+          <option value="بسكرة" data-price="700">بسكرة - 700 دج</option>
+          <option value="بشار" data-price="800">بشار - 800 دج</option>
+          <option value="البليدة" data-price="400">البليدة - 400 دج</option>
+          <option value="البويرة" data-price="500">البويرة - 500 دج</option>
+          <option value="تمنراست" data-price="1000">تمنراست - 1000 دج</option>
+          <option value="تبسة" data-price="600">تبسة - 600 دج</option>
+          <option value="تلمسان" data-price="600">تلمسان - 600 دج</option>
+          <option value="تيارت" data-price="600">تيارت - 600 دج</option>
+          <option value="تيزي وزو" data-price="500">تيزي وزو - 500 دج</option>
+          <option value="الجزائر" data-price="400">الجزائر - 400 دج</option>
+          <option value="الجلفة" data-price="600">الجلفة - 600 دج</option>
+          <option value="جيجل" data-price="600">جيجل - 600 دج</option>
+          <option value="سطيف" data-price="600">سطيف - 600 دج</option>
+          <option value="سعيدة" data-price="600">سعيدة - 600 دج</option>
+          <option value="سكيكدة" data-price="600">سكيكدة - 600 دج</option>
+          <option value="سيدي بلعباس" data-price="600">سيدي بلعباس - 600 دج</option>
+          <option value="عنابة" data-price="600">عنابة - 600 دج</option>
+          <option value="قالمة" data-price="600">قالمة - 600 دج</option>
+          <option value="قسنطينة" data-price="600">قسنطينة - 600 دج</option>
+          <option value="المدية" data-price="500">المدية - 500 دج</option>
+          <option value="مستغانم" data-price="600">مستغانم - 600 دج</option>
+          <option value="المسيلة" data-price="600">المسيلة - 600 دج</option>
+          <option value="معسكر" data-price="600">معسكر - 600 دج</option>
+          <option value="ورقلة" data-price="800">ورقلة - 800 دج</option>
+          <option value="وهران" data-price="600">وهران - 600 دج</option>
+          <option value="البيض" data-price="700">البيض - 700 دج</option>
+          <option value="إليزي" data-price="1000">إليزي - 1000 دج</option>
+          <option value="برج بوعريريج" data-price="600">برج بوعريريج - 600 دج</option>
+          <option value="بومرداس" data-price="500">بومرداس - 500 دج</option>
+          <option value="الطارف" data-price="600">الطارف - 600 دج</option>
+          <option value="تندوف" data-price="1000">تندوف - 1000 دج</option>
+          <option value="تيسمسيلت" data-price="600">تيسمسيلت - 600 دج</option>
+          <option value="الوادي" data-price="700">الوادي - 700 دج</option>
+          <option value="خنشلة" data-price="600">خنشلة - 600 دج</option>
+          <option value="سوق أهراس" data-price="600">سوق أهراس - 600 دج</option>
+          <option value="تيبازة" data-price="500">تيبازة - 500 دج</option>
+          <option value="ميلة" data-price="600">ميلة - 600 دج</option>
+          <option value="عين الدفلى" data-price="500">عين الدفلى - 500 دج</option>
+          <option value="النعامة" data-price="700">النعامة - 700 دج</option>
+          <option value="عين تموشنت" data-price="600">عين تموشنت - 600 دج</option>
+          <option value="غرداية" data-price="800">غرداية - 800 دج</option>
+          <option value="غليزان" data-price="600">غليزان - 600 دج</option>
+          <option value="تيميمون" data-price="900">تيميمون - 900 دج</option>
+          <option value="برج باجي مختار" data-price="1000">برج باجي مختار - 1000 دج</option>
+          <option value="أولاد جلال" data-price="700">أولاد جلال - 700 دج</option>
+          <option value="بني عباس" data-price="900">بني عباس - 900 دج</option>
+          <option value="عين صالح" data-price="900">عين صالح - 900 دج</option>
+          <option value="عين قزام" data-price="1000">عين قزام - 1000 دج</option>
+          <option value="تقرت" data-price="800">تقرت - 800 دج</option>
+          <option value="جانت" data-price="1000">جانت - 1000 دج</option>
+          <option value="المغير" data-price="700">المغير - 700 دج</option>
+          <option value="المنيعة" data-price="900">المنيعة - 900 دج</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">اختيار المنتج <span class="req">*</span></label>
+        <select name="product_name" class="form-input" required>
+          <option value="" disabled selected>اختاري المنتج</option>
+          <option value="لوحة الآية والاسمين" data-price="3900">لوحة الآية والاسمين - 3900 دج</option>
+          <option value="ليفريه دو فاميل الفاخر" data-price="4900">ليفريه دو فاميل الفاخر - 4900 دج</option>
+          <option value="مفرغة التاريخ الذهبية" data-price="5900">مفرغة التاريخ الذهبية - 5900 دج</option>
+        </select>
       </div>
 
       <!-- Submit -->
@@ -1108,10 +1186,25 @@
     formSuccess.style.display = 'none';
     formError.style.display = 'none';
 
+    const wifeName = form.querySelector('[name="wife_name"]').value;
+    const husbandName = form.querySelector('[name="husband_name"]').value;
+    const phone = form.querySelector('[name="phone"]').value;
+    const contractDate = form.querySelector('[name="contract_date"]').value;
+    const wilayaSelect = form.querySelector('[name="wilaya"]');
+    const productSelect = form.querySelector('[name="product_name"]');
+    const selectedWilaya = wilayaSelect.options[wilayaSelect.selectedIndex];
+    const selectedProduct = productSelect.options[productSelect.selectedIndex];
+
     const data = {
-      name: form.querySelector('[name="name"]').value,
-      phone: form.querySelector('[name="phone"]').value,
-      product_name: form.querySelector('[name="product_name"]').value
+      name: `${wifeName} / ${husbandName}`,
+      wife_name: wifeName,
+      husband_name: husbandName,
+      phone,
+      contract_date: contractDate,
+      wilaya: wilayaSelect.value,
+      wilaya_price: selectedWilaya.dataset.price || '',
+      product_name: productSelect.value,
+      product_price: selectedProduct.dataset.price || ''
     };
 
     try {
