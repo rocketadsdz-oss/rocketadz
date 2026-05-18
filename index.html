@@ -697,6 +697,168 @@
     border-color: var(--gold);
   }
 
+  /* ── ORDER FORM ── */
+  .order-section {
+    background: var(--cream);
+    padding: 6rem 2rem;
+  }
+
+  .order-inner {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .order-form {
+    background: #fff;
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .req { color: var(--burgundy); }
+
+  .form-hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    background: var(--ivory);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    direction: rtl;
+  }
+
+  .form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+
+  .form-input::placeholder { color: #bbb; }
+
+  /* Upload zone */
+  .upload-zone {
+    border: 2px dashed rgba(201,168,76,0.4);
+    background: var(--ivory);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .upload-placeholder {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .upload-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+  .upload-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .upload-sub { font-size: 0.75rem; color: var(--muted); }
+
+  .upload-preview {
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .remove-img {
+    display: inline-block;
+    margin-top: 0.75rem;
+    background: none;
+    border: 1px solid rgba(122,28,46,0.3);
+    color: var(--burgundy);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .remove-img:hover { background: var(--burgundy); color: #fff; }
+
+  /* Submit button */
+  .form-submit {
+    width: 100%;
+    padding: 1.1rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--deep);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201,168,76,0.35);
+  }
+
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .form-success, .form-error {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    border-radius: 2px;
+  }
+
+  .form-success { background: rgba(34,120,60,0.08); border: 1px solid rgba(34,120,60,0.2); color: #1a6b35; }
+  .form-error { background: rgba(122,28,46,0.08); border: 1px solid rgba(122,28,46,0.2); color: var(--burgundy); }
+
+  .fb-link {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+
+  .fb-link:hover { border-color: var(--gold); }
+
   /* Responsive */
   @media (max-width: 600px) {
     .why-grid, .products-grid, .testimonials-grid { grid-template-columns: 1fr; }
@@ -888,20 +1050,79 @@
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section class="cta-banner" id="contact">
-  <h2 class="cta-title">هل أنتِ عروسة؟ 🌹</h2>
-  <p class="cta-sub">اطلبي هديتك المخصّصة الآن — فقط أملئي الاستمارة وسنتواصل معكِ في أقرب وقت</p>
+<!-- ORDER FORM SECTION -->
+<section class="order-section" id="contact">
+  <div class="order-inner">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">✦ اطلبي الآن</p>
+      <h2 class="section-title">اطلبي هديتك المخصّصة</h2>
+      <div class="section-line"><div class="diamond"></div></div>
+      <p style="color:var(--muted);margin-top:1rem;font-size:0.95rem;">أملئي الاستمارة وسنتواصل معكِ في أقرب وقت 🌹</p>
+    </div>
 
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd60g36KdgFWsAikXasE_8yG11PnVpOKC8PCtsIDaRwX9hZIg/viewform?usp=publish-editor" class="cta-btn order-btn" target="_blank">
-    📋 اطلبي منتجك الآن
-  </a>
+    <form class="order-form reveal" id="orderForm" action="https://formspree.io/f/mjgzvjnd" method="POST" enctype="multipart/form-data">
 
-  <p style="color:rgba(255,255,255,0.45);font-size:0.85rem;margin:1.5rem 0 0.5rem;">أو تواصلي معنا مباشرة</p>
+      <!-- Name -->
+      <div class="form-group">
+        <label class="form-label">الاسم الكامل <span class="req">*</span></label>
+        <input type="text" name="name" class="form-input" placeholder="مثال: فاطمة بن علي" required>
+      </div>
 
-  <a href="https://www.facebook.com/search/top?q=d%C3%B8ha%27s%20cr%C3%A9ative" class="cta-btn-secondary" target="_blank">
-    تواصلي على فيسبوك ✦
-  </a>
+      <!-- Phone -->
+      <div class="form-group">
+        <label class="form-label">رقم الهاتف <span class="req">*</span></label>
+        <input type="tel" name="phone" class="form-input" placeholder="05xxxxxxxx" required>
+      </div>
+
+      <!-- Product image upload -->
+      <div class="form-group">
+        <label class="form-label">صورة المنتج المطلوب <span class="req">*</span></label>
+        <p class="form-hint">أرسلي صورة المنتج الذي يعجبكِ أو صورة مرجعية للتصميم</p>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" name="product_image" id="fileInput" accept="image/*" style="display:none">
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <span class="upload-icon">📎</span>
+            <p class="upload-text">اضغطي هنا لرفع الصورة</p>
+            <p class="upload-sub">PNG, JPG حتى 10MB</p>
+          </div>
+          <div class="upload-preview" id="uploadPreview" style="display:none">
+            <img id="previewImg" src="" alt="preview" style="max-width:100%;max-height:200px;object-fit:contain;border-radius:4px;">
+            <button type="button" class="remove-img" id="removeImg">✕ إزالة</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product name (optional) -->
+      <div class="form-group">
+        <label class="form-label">اسم المنتج (اختياري)</label>
+        <p class="form-hint">إذا عرفتِ اسم المنتج يمكنكِ كتابته هنا</p>
+        <input type="text" name="product_name" class="form-input" placeholder="مثال: لوحة الآية والاسمين">
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="form-submit" id="submitBtn">
+        <span id="submitText">إرسال الطلب ✦</span>
+      </button>
+
+      <!-- Success message -->
+      <div class="form-success" id="formSuccess" style="display:none">
+        <span>✅</span>
+        <p>تم إرسال طلبك بنجاح! سنتواصل معكِ قريباً 🌹</p>
+      </div>
+
+      <!-- Error message -->
+      <div class="form-error" id="formError" style="display:none">
+        <span>⚠️</span>
+        <p>حدث خطأ، يرجى المحاولة مرة أخرى.</p>
+      </div>
+
+    </form>
+
+    <div style="text-align:center;margin-top:2rem;" class="reveal">
+      <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.75rem;">أو تواصلي معنا مباشرة</p>
+      <a href="https://www.facebook.com/search/top?q=d%C3%B8ha%27s%20cr%C3%A9ative" class="fb-link" target="_blank">تواصلي على فيسبوك ✦</a>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -941,6 +1162,92 @@
       const target = document.querySelector(a.getAttribute('href'));
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
+  });
+
+  // Image upload preview
+  const uploadZone = document.getElementById('uploadZone');
+  const fileInput = document.getElementById('fileInput');
+  const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+  const uploadPreview = document.getElementById('uploadPreview');
+  const previewImg = document.getElementById('previewImg');
+  const removeImg = document.getElementById('removeImg');
+
+  uploadZone.addEventListener('click', () => fileInput.click());
+
+  uploadZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    uploadZone.classList.add('dragover');
+  });
+
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) showPreview(file);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) showPreview(fileInput.files[0]);
+  });
+
+  function showPreview(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      previewImg.src = e.target.result;
+      uploadPlaceholder.style.display = 'none';
+      uploadPreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  removeImg.addEventListener('click', () => {
+    fileInput.value = '';
+    previewImg.src = '';
+    uploadPreview.style.display = 'none';
+    uploadPlaceholder.style.display = 'block';
+  });
+
+  // Form submission
+  const form = document.getElementById('orderForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitText.textContent = 'جارٍ الإرسال...';
+    formSuccess.style.display = 'none';
+    formError.style.display = 'none';
+
+    try {
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        formSuccess.style.display = 'flex';
+        form.reset();
+        previewImg.src = '';
+        uploadPreview.style.display = 'none';
+        uploadPlaceholder.style.display = 'block';
+        submitText.textContent = 'إرسال الطلب ✦';
+      } else {
+        formError.style.display = 'flex';
+        submitText.textContent = 'إرسال الطلب ✦';
+      }
+    } catch {
+      formError.style.display = 'flex';
+      submitText.textContent = 'إرسال الطلب ✦';
+    }
+
+    submitBtn.disabled = false;
   });
 </script>
 
