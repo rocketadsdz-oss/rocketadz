@@ -757,60 +757,6 @@
 
   .form-input::placeholder { color: #bbb; }
 
-  /* Upload zone */
-  .upload-zone {
-    border: 2px dashed rgba(201,168,76,0.4);
-    background: var(--ivory);
-    cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .upload-zone:hover, .upload-zone.dragover {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.05);
-  }
-
-  .upload-placeholder {
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .upload-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-
-  .upload-text {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--gold);
-    margin-bottom: 0.25rem;
-  }
-
-  .upload-sub { font-size: 0.75rem; color: var(--muted); }
-
-  .upload-preview {
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  .remove-img {
-    display: inline-block;
-    margin-top: 0.75rem;
-    background: none;
-    border: 1px solid rgba(122,28,46,0.3);
-    color: var(--burgundy);
-    font-family: 'Tajawal', sans-serif;
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .remove-img:hover { background: var(--burgundy); color: #fff; }
-
   /* Submit button */
   .form-submit {
     width: 100%;
@@ -1060,7 +1006,7 @@
       <p style="color:var(--muted);margin-top:1rem;font-size:0.95rem;">أملئي الاستمارة وسنتواصل معكِ في أقرب وقت 🌹</p>
     </div>
 
-    <form class="order-form reveal" id="orderForm" action="https://formspree.io/f/mjgzvjnd" method="POST" enctype="multipart/form-data">
+    <form class="order-form reveal" id="orderForm">
 
       <!-- Name -->
       <div class="form-group">
@@ -1072,24 +1018,6 @@
       <div class="form-group">
         <label class="form-label">رقم الهاتف <span class="req">*</span></label>
         <input type="tel" name="phone" class="form-input" placeholder="05xxxxxxxx" required>
-      </div>
-
-      <!-- Product image upload -->
-      <div class="form-group">
-        <label class="form-label">صورة المنتج المطلوب <span class="req">*</span></label>
-        <p class="form-hint">أرسلي صورة المنتج الذي يعجبكِ أو صورة مرجعية للتصميم</p>
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" name="product_image" id="fileInput" accept="image/*" style="display:none">
-          <div class="upload-placeholder" id="uploadPlaceholder">
-            <span class="upload-icon">📎</span>
-            <p class="upload-text">اضغطي هنا لرفع الصورة</p>
-            <p class="upload-sub">PNG, JPG حتى 10MB</p>
-          </div>
-          <div class="upload-preview" id="uploadPreview" style="display:none">
-            <img id="previewImg" src="" alt="preview" style="max-width:100%;max-height:200px;object-fit:contain;border-radius:4px;">
-            <button type="button" class="remove-img" id="removeImg">✕ إزالة</button>
-          </div>
-        </div>
       </div>
 
       <!-- Product name (optional) -->
@@ -1164,50 +1092,7 @@
     });
   });
 
-  // Image upload preview
-  const uploadZone = document.getElementById('uploadZone');
-  const fileInput = document.getElementById('fileInput');
-  const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-  const uploadPreview = document.getElementById('uploadPreview');
-  const previewImg = document.getElementById('previewImg');
-  const removeImg = document.getElementById('removeImg');
-
-  uploadZone.addEventListener('click', () => fileInput.click());
-
-  uploadZone.addEventListener('dragover', e => {
-    e.preventDefault();
-    uploadZone.classList.add('dragover');
-  });
-
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-
-  uploadZone.addEventListener('drop', e => {
-    e.preventDefault();
-    uploadZone.classList.remove('dragover');
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) showPreview(file);
-  });
-
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) showPreview(fileInput.files[0]);
-  });
-
-  function showPreview(file) {
-    const reader = new FileReader();
-    reader.onload = e => {
-      previewImg.src = e.target.result;
-      uploadPlaceholder.style.display = 'none';
-      uploadPreview.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-
-  removeImg.addEventListener('click', () => {
-    fileInput.value = '';
-    previewImg.src = '';
-    uploadPreview.style.display = 'none';
-    uploadPlaceholder.style.display = 'block';
-  });
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxqoyqXakGnDdlzLja8cvA323ulqseCsK6ML1DJoQ-5fgQJGK-O2lW5ShohWS0Bj1sj/exec';
 
   // Form submission
   const form = document.getElementById('orderForm');
@@ -1223,25 +1108,22 @@
     formSuccess.style.display = 'none';
     formError.style.display = 'none';
 
-    try {
-      const data = new FormData(form);
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+    const data = {
+      name: form.querySelector('[name="name"]').value,
+      phone: form.querySelector('[name="phone"]').value,
+      product_name: form.querySelector('[name="product_name"]').value
+    };
 
-      if (res.ok) {
-        formSuccess.style.display = 'flex';
-        form.reset();
-        previewImg.src = '';
-        uploadPreview.style.display = 'none';
-        uploadPlaceholder.style.display = 'block';
-        submitText.textContent = 'إرسال الطلب ✦';
-      } else {
-        formError.style.display = 'flex';
-        submitText.textContent = 'إرسال الطلب ✦';
-      }
+    try {
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      formSuccess.style.display = 'flex';
+      form.reset();
+      submitText.textContent = 'إرسال الطلب ✦';
     } catch {
       formError.style.display = 'flex';
       submitText.textContent = 'إرسال الطلب ✦';
