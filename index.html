@@ -757,6 +757,35 @@
 
   .form-input::placeholder { color: #bbb; }
 
+  .price-summary {
+    border: 1px solid rgba(201,168,76,0.25);
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,246,236,0.95));
+    padding: 1.15rem 1.25rem;
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--deep);
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .price-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .price-total {
+    border-top: 1px solid rgba(201,168,76,0.25);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+    font-weight: 700;
+    font-size: 1.02rem;
+  }
+
   /* Submit button */
   .form-submit {
     width: 100%;
@@ -1105,6 +1134,21 @@
         </select>
       </div>
 
+      <div class="price-summary">
+        <div class="price-row">
+          <span>سعر المنتج</span>
+          <strong id="productPrice">0 دج</strong>
+        </div>
+        <div class="price-row">
+          <span>سعر التوصيل</span>
+          <strong id="deliveryPrice">0 دج</strong>
+        </div>
+        <div class="price-row price-total">
+          <span>السعر الإجمالي للتأكيد</span>
+          <strong id="totalPrice">0 دج</strong>
+        </div>
+      </div>
+
       <!-- Submit -->
       <button type="submit" class="form-submit" id="submitBtn">
         <span id="submitText">إرسال الطلب ✦</span>
@@ -1178,6 +1222,34 @@
   const submitText = document.getElementById('submitText');
   const formSuccess = document.getElementById('formSuccess');
   const formError = document.getElementById('formError');
+  const wilayaSelect = form.querySelector('[name="wilaya"]');
+  const productSelect = form.querySelector('[name="product_name"]');
+  const productPrice = document.getElementById('productPrice');
+  const deliveryPrice = document.getElementById('deliveryPrice');
+  const totalPrice = document.getElementById('totalPrice');
+
+  function formatDzd(value) {
+    return `${value} دج`;
+  }
+
+  function getSelectedPrice(selectElement) {
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    return Number(selectedOption?.dataset.price || 0);
+  }
+
+  function updateTotalPrice() {
+    const productAmount = getSelectedPrice(productSelect);
+    const deliveryAmount = getSelectedPrice(wilayaSelect);
+    const totalAmount = productAmount + deliveryAmount;
+
+    productPrice.textContent = formatDzd(productAmount);
+    deliveryPrice.textContent = formatDzd(deliveryAmount);
+    totalPrice.textContent = formatDzd(totalAmount);
+  }
+
+  wilayaSelect.addEventListener('change', updateTotalPrice);
+  productSelect.addEventListener('change', updateTotalPrice);
+  updateTotalPrice();
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -1190,10 +1262,9 @@
     const husbandName = form.querySelector('[name="husband_name"]').value;
     const phone = form.querySelector('[name="phone"]').value;
     const contractDate = form.querySelector('[name="contract_date"]').value;
-    const wilayaSelect = form.querySelector('[name="wilaya"]');
-    const productSelect = form.querySelector('[name="product_name"]');
     const selectedWilaya = wilayaSelect.options[wilayaSelect.selectedIndex];
     const selectedProduct = productSelect.options[productSelect.selectedIndex];
+    const totalAmount = getSelectedPrice(productSelect) + getSelectedPrice(wilayaSelect);
 
     const data = {
       name: `${wifeName} / ${husbandName}`,
@@ -1204,7 +1275,8 @@
       wilaya: wilayaSelect.value,
       wilaya_price: selectedWilaya.dataset.price || '',
       product_name: productSelect.value,
-      product_price: selectedProduct.dataset.price || ''
+      product_price: selectedProduct.dataset.price || '',
+      total_price: String(totalAmount)
     };
 
     try {
@@ -1216,6 +1288,7 @@
       });
       formSuccess.style.display = 'flex';
       form.reset();
+      updateTotalPrice();
       submitText.textContent = 'إرسال الطلب ✦';
     } catch {
       formError.style.display = 'flex';
